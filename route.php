@@ -4,6 +4,7 @@
 
         private $pages;
         private $where;
+        private $globals;
 
         public function __construct()
         {
@@ -13,6 +14,12 @@
 
         public function add($url = "", $page = "")
         {
+
+            if($url == 1){
+                $this->globals = $page;
+                return true;
+            }
+
             if(!empty($page)){
                 if(!isset($this->pages[$url])){
                     $this->pages[$url] = $page;
@@ -37,7 +44,37 @@
 
         public function show($url = "", $specialVariable = "")
         {
+
             $vars = $specialVariable;
+
+            if(isset($this->globals)){
+                if(isset($this->globals["_GET"])){
+                    $GET = $this->globals["_GET"];
+                }else{
+                    $GET = array();
+                }
+                if(isset($this->globals["_POST"])){
+                    $POST = $this->globals["_POST"];
+                }else{
+                    $POST = array();
+                }
+                if(isset($this->globals["_COOKIE"])){
+                    $COOKIE = $this->globals["_COOKIE"];
+                }else{
+                    $COOKIE = array();
+                }
+                if(isset($this->globals["_FILES"])){
+                    $FILES = $this->globals["_FILES"];
+                }else{
+                    $FILES = array();
+                }
+                if(isset($this->globals["_SERVER"])){
+                    $SERVER = $this->globals["_SERVER"];
+                }else{
+                    $SERVER = array();
+                }
+                
+            }
 
             foreach ($this->pages as $Purl => $Ppage) {
                 if($Purl == $url){
