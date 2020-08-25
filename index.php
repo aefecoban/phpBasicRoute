@@ -19,6 +19,8 @@
     $route->add("/","home.php");
     $route->add("/anasayfa","home.php");
 
+    $route->add(1, $GLOBALS);
+
     $route->show($url);
 
 ?>
